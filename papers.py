@@ -16,7 +16,7 @@ import datetime
 import json
 
 
-def decide(input_file, watchlist_file, countries_file):
+def decide(example_entries.json, watchlist.json, countries.json):
     """
     Decides whether a traveller's entry into Kanadia should be accepted
 
@@ -26,6 +26,7 @@ def decide(input_file, watchlist_file, countries_file):
         an entry or transit visa is required, and whether there is currently a medical advisory
     :return: List of strings. Possible values of strings are: "Accept", "Reject", "Secondary", and "Quarantine"
     """
+
     return ["Reject"]
 
 
