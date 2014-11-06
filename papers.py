@@ -16,7 +16,7 @@ import datetime
 import json
 
 
-def decide(example_entries.json, watchlist.json, countries.json):
+def decide(input_file, watchlist_file, countries_file):
     """
     Decides whether a traveller's entry into Kanadia should be accepted
 
@@ -26,13 +26,24 @@ def decide(example_entries.json, watchlist.json, countries.json):
         an entry or transit visa is required, and whether there is currently a medical advisory
     :return: List of strings. Possible values of strings are: "Accept", "Reject", "Secondary", and "Quarantine"
     """
+    with open('example_entries.json', 'r') as input_file:
+        input_file_contents = input_file.read()
+        entries_contents = json.loads(input_file_contents)
 
+        with open('watchlist.json', 'r') as watchlist_file:
+            watchlist_file_contents = watchlist_file.read()
+            watchlist_contents = json.loads(watchlist_file_contents)
+
+
+        with open('countries.json', 'r') as countries_file:
+            countries_file_contents = countries_file.read()
+            countries_contents = json.loads(countries_file_contents)
     return ["Reject"]
 
 
 def valid_passport_format(passport_number):
     """
-    Checks whether a pasport number is five sets of five alpha-number characters separated by dashes
+    Checks whether a passport number is five sets of five alpha-number characters separated by dashes
     :param passport_number: alpha-numeric string
     :return: Boolean; True if the format is valid, False otherwise
     """
