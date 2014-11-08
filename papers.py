@@ -16,6 +16,7 @@ import datetime
 import json
 
 
+
 def decide(input_file, watchlist_file, countries_file):
     """
     Decides whether a traveller's entry into Kanadia should be accepted
@@ -30,15 +31,23 @@ def decide(input_file, watchlist_file, countries_file):
         input_file_contents = input_file.read()
         entries_contents = json.loads(input_file_contents)
 
-        with open('watchlist.json', 'r') as watchlist_file:
-            watchlist_file_contents = watchlist_file.read()
-            watchlist_contents = json.loads(watchlist_file_contents)
+    with open('watchlist.json', 'r') as watchlist_file:
+        watchlist_file_contents = watchlist_file.read()
+        watchlist_contents = json.loads(watchlist_file_contents)
 
+    with open('countries.json', 'r') as countries_file:
+        countries_file_contents = countries_file.read()
+        countries_contents = json.loads(countries_file_contents)
 
-        with open('countries.json', 'r') as countries_file:
-            countries_file_contents = countries_file.read()
-            countries_contents = json.loads(countries_file_contents)
-    return ["Reject"]
+    for e in entries_contents:
+        for e_value in e.values():
+            for w in watchlist_contents:
+                for w_value in w.values():
+                    if e_value == w_value:
+                        return "Secondary"
+
+    #else:
+        return ["Reject"]
 
 
 def valid_passport_format(passport_number):
